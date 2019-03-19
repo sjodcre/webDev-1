@@ -15,9 +15,9 @@ var commentRoutes   = require("./routes/comments"),
     campgroundRoutes= require("./routes/campgrounds"),
     indexRoutes     = require("./routes/index")
 
-//mongoose.connect("mongodb+srv://oma:omapassword@clustertest-btw01.mongodb.net/test?retryWrites=true");
-//mongoose.connect("mongodb://localhost:27017/yelp_camp",{useNewUrlParser: true});
-mongoose.connect(process.env.DATABASEURL);
+//mongoose.connect("mongodb+srv://oma:omapassword@clustertest-btw01.mongodb.net/test?retryWrites=true"); mlab
+//mongoose.connect("mongodb://localhost:27017/yelp_camp",{useNewUrlParser: true}); local
+mongoose.connect(process.env.DATABASEURL); //declared at heroku env var
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
