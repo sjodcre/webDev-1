@@ -33,15 +33,16 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     
 });
 //NEW
-router.get("/new", function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
   res.render("campgrounds/new");  
 });
 //SHOW
 router.get("/:id",function(req, res){
     
     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-       if(err){
-           console.log(err)
+       if(err || !foundCampground){
+            req.flash("error","Campground not found");
+            res.redirect("back");
        } else {
            res.render("campgrounds/show", {campground:foundCampground});
        }
